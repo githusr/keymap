@@ -101,3 +101,5 @@ g_ControlRepeatDetected := false
 ~*<^F12::
     g_AbortSendEsc := true
     return
+
+Esc::CapsLock
