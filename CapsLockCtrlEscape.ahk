@@ -4,24 +4,15 @@
 SetStoreCapsLockMode false
 LShift & RShift:: SetCapsLockState !GetKeyState("CapsLock", "T")
 
-g_ControlRepeatDetected := false
 g_AbortSendEsc := false
-g_LastCtrlKeyDownTime := 0
 
 *CapsLock:: {
-    if (g_ControlRepeatDetected) {
-        return
-    }
-    Send "{LCtrl down}"
-    global g_ControlRepeatDetected := true
     global g_AbortSendEsc := false
-    global g_LastCtrlKeyDownTime := A_TickCount
-}
-
-*CapsLock Up:: {
+    Send "{LCtrl down}"
+    LastCtrlKeyDownTime := A_TickCount
+    KeyWait "CapsLock"
     Send "{LCtrl up}"
-    global g_ControlRepeatDetected := false
-    if (!g_AbortSendEsc && A_TickCount - g_LastCtrlKeyDownTime <= 250) {
+    if (!g_AbortSendEsc && A_TickCount - LastCtrlKeyDownTime <= 250) {
         Send "{Esc}"
     }
 }
