@@ -1,34 +1,30 @@
-g_LastCtrlKeyDownTime := 0
-g_AbortSendEsc := false
+#Requires AutoHotkey 2.0.19 64-bit
+#SingleInstance Force
+
+SetStoreCapsLockMode false
+LShift & RShift:: SetCapsLockState !GetKeyState("CapsLock", "T")
+
 g_ControlRepeatDetected := false
+g_AbortSendEsc := false
+g_LastCtrlKeyDownTime := 0
 
-*CapsLock::
-    if (g_ControlRepeatDetected)
-    {
+*CapsLock:: {
+    if (g_ControlRepeatDetected) {
         return
     }
+    Send "{LCtrl down}"
+    global g_ControlRepeatDetected := true
+    global g_AbortSendEsc := false
+    global g_LastCtrlKeyDownTime := A_TickCount
+}
 
-    send,{LCtrl down}
-    g_LastCtrlKeyDownTime := A_TickCount
-    g_AbortSendEsc := false
-    g_ControlRepeatDetected := true
-
-    return
-
-*CapsLock Up::
-    send,{LCtrl up}
-    g_ControlRepeatDetected := false
-    if (g_AbortSendEsc)
-    {
-        return
+*CapsLock Up:: {
+    Send "{LCtrl up}"
+    global g_ControlRepeatDetected := false
+    if (!g_AbortSendEsc && A_TickCount - g_LastCtrlKeyDownTime <= 250) {
+        Send "{Esc}"
     }
-    current_time := A_TickCount
-    time_elapsed := current_time - g_LastCtrlKeyDownTime
-    if (time_elapsed <= 250)
-    {
-        SendInput {Esc}
-    }
-    return
+}
 
 ~*<^a::
 ~*<^b::
@@ -75,7 +71,7 @@ g_ControlRepeatDetected := false
 ~*<^PgUp::
 ~*<^PgDn::
 ~*<^Tab::
-~*<^Return::
+~*<^Enter::
 ~*<^,::
 ~*<^.::
 ~*<^/::
@@ -98,8 +94,6 @@ g_ControlRepeatDetected := false
 ~*<^F9::
 ~*<^F10::
 ~*<^F11::
-~*<^F12::
-    g_AbortSendEsc := true
-    return
-
-Esc::CapsLock
+~*<^F12:: {
+    global g_AbortSendEsc := true
+}
