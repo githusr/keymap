@@ -1,6 +1,8 @@
 #Requires AutoHotkey 2.0.19 64-bit
 #SingleInstance Force
 
+ProcessSetPriority "High"
+
 SetStoreCapsLockMode false
 LShift & RShift:: SetCapsLockState !GetKeyState("CapsLock", "T")
 
@@ -30,3 +32,24 @@ LShift & RShift:: SetCapsLockState !GetKeyState("CapsLock", "T")
 *<^h:: Send "{Blind^}{BS}"
 *<^n:: Send "{Blind^}{Down}"
 *<^p:: Send "{Blind^}{Up}"
+
+#HotIf WinActive("ahk_exe msedge.exe")
+<^q::^Tab
+<^Tab::^q
+#HotIf
+
+#e:: {
+    if WinExist(" - File Explorer") {
+        WinActivate
+    } else {
+        Run "explorer.exe"
+    }
+}
+
+#t:: {
+    if WinExist("ahk_exe WindowsTerminal.exe") {
+        WinActivate
+    } else {
+        Run "wt.exe"
+    }
+}
