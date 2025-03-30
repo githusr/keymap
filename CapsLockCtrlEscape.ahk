@@ -42,14 +42,6 @@ LShift & RShift:: SetCapsLockState !GetKeyState("CapsLock", "T")
     if WinExist(" - File Explorer") {
         WinActivate
     } else {
-        Run "explorer.exe"
-    }
-}
-
-#t:: {
-    if WinExist("ahk_exe WindowsTerminal.exe") {
-        WinActivate
-    } else {
-        Run "wt.exe"
+        Run "explorer"
     }
 }
