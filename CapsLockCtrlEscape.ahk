@@ -17,17 +17,13 @@ LShift & RShift:: SetCapsLockState !GetKeyState("CapsLock", "T")
 }
 
 <!q::!F4
-<!a::^a
 <!b::^b
-<!e::^e
 <!f::^f
 <!h::^h
 <!n::^n
 <!p::^p
 
-*<^a:: Send "{Blind^}{Home}"
 *<^b:: Send "{Blind^}{Left}"
-*<^e:: Send "{Blind^}{End}"
 *<^f:: Send "{Blind^}{Right}"
 *<^h:: Send "{Blind^}{BS}"
 *<^n:: Send "{Blind^}{Down}"
