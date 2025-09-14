@@ -1,9 +1,9 @@
 #Requires AutoHotkey 2.0.19 64-bit
 #SingleInstance Force
+; #NoTrayIcon
 
 ProcessSetPriority "High"
 
-SetStoreCapsLockMode false
 LShift & RShift:: SetCapsLockState !GetKeyState("CapsLock", "T")
 
 *CapsLock:: {
