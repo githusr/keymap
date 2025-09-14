@@ -1,0 +1,27 @@
+(defcfg
+  process-unmapped-keys (all-except ralt)
+  log-layer-changes no
+  concurrent-tap-hold yes
+)
+
+(defsrc)
+
+(deftemplate emacs (src dst)
+  $src (switch
+    (lctl) (unmod (lctl) $dst) break
+    (lalt) (multi rctl (macro (unmod (lalt) $src))) break
+    () _ break
+  )
+)
+
+(deflayermap base
+  caps (tap-hold-press 200 200 esc lctl)
+  rsft (fork _ caps (lsft))
+  (t! emacs p up)
+  (t! emacs n down)
+  (t! emacs b lft)
+  (t! emacs f rght)
+  (t! emacs h bspc)
+  q (fork _ f4 (lalt))
+  s (fork _ (unmod f1) (lalt))
+)
