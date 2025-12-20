@@ -6,7 +6,11 @@
   notify-cfg-reload-silent true
 )
 
-(defsrc)
+(defsrc
+  ;; mlft
+  mrgt mmid mbck mfwd
+  mwu mwd mwl mwr
+)
 
 (deftemplate emacs (src dst)
   $src (switch
