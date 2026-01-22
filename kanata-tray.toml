@@ -1,0 +1,7 @@
+"$schema" = "https://raw.githubusercontent.com/rszyma/kanata-tray/main/doc/config_schema.json"
+
+[defaults]
+kanata_executable = './kanata'
+autorestart_on_crash = true
+autorun = true
+extra_args = ['--no-wait', '--quiet', '--nodelay']
