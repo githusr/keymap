@@ -4,6 +4,7 @@
   concurrent-tap-hold true
   notify-cfg-reload false
   notify-cfg-reload-silent true
+  linux-device-detect-mode keyboard-mice
 )
 
 (defsrc
